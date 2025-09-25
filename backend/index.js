@@ -9,9 +9,11 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
-
+import dotenv from "dotenv";
 import csrf from "csurf";
 import cookieParser from "cookie-parser";
+
+
 
 const app = express();
 const prisma = new PrismaClient();
@@ -26,6 +28,7 @@ const limiter = rateLimit({
 });
 
 // Middleware order matters!
+dotenv.config();
 app.use(helmet());
 app.use(
   cors({
@@ -50,7 +53,7 @@ app.use((req, res, next) => {
 // Sessions
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "process.env.SESSION_SECRET",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -89,8 +92,8 @@ googleAuth();
 passport.use(
   new GitHubStrategy(
     {
-      clientID: "Ov23lio1ILWXtBrqbajg",
-      clientSecret: "d9199d7eff9cbcdad6fb53e24587abb5bdf0b901",
+      clientID: "process.env.GITHUB_CLIDENT_ID",
+      clientSecret: "process.env.GITHUB_SECRET",
       callbackURL: "http://localhost:5000/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {

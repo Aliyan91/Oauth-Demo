@@ -8,8 +8,8 @@ export const facebookAuth = () => {
   passport.use(
     new facebookStrategy( // ✅ corrected
       {
-        clientID: "1341968424380948",
-        clientSecret: "90c137222a313dc1510e23049bdd1f3b",
+        clientID: "process.env.FACEBOOK_CLIENT_ID",
+        clientSecret: "process.env.FACEBOOK_SECRET",
         callbackURL: "http://localhost:5000/auth/facebook/callback",
       },
       async (accessToken, refreshToken, profile, done) => {

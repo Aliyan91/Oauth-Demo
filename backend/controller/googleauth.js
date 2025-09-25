@@ -9,8 +9,8 @@ export const googleAuth = () => {
   passport.use(
     new GoogleStrategy(   // ✅ corrected
       {
-        clientID: "26303738701-h7uk72afp87dnd59j4b75dlq0204k23a.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientID: "process.env.GOOGLE_CLIENT_ID",
+        clientSecret: "process.env.GOOGLE_SECRET",
         callbackURL: "http://localhost:5000/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
