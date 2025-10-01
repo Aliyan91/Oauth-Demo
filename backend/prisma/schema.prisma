@@ -18,7 +18,8 @@ model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   profileId  String  @unique
   name      String?
-  email     String?
+  email     String @unique
+  password  String?
   isVerified Boolean @default(false)
   provider  String 
   createdAt DateTime @default(now())
